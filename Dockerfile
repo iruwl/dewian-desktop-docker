@@ -2,7 +2,7 @@
 # run   -> docker run -it --rm -p 5901:5901 -e USER=xuser dewian-desktop bash -c "vncserver :1 -geometry 1280x700 -depth 24 && tail -F ~/.vnc/*.log"
 # vnc-password:debian
 
-FROM dewian:latest
+FROM iruwl/dewian:latest
 MAINTAINER Khairul Anwar <irul.sylva@gmail.com>
 
 ENV DEBIAN_FRONTEND noninteractive
