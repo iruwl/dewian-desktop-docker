@@ -2,7 +2,7 @@
 
 ### Base on dewian:latest
 
-Debian-desktop image dengan repositori lokal #kambing.ui.ac.id dan desktop xfce4. Use VNC Viewer (or alternate) to access it.
+Debian-desktop image dengan repositori lokal #kambing.ui.ac.id dan desktop xfce4. Gunakan VNC Viewer (atau sejenisnya) untuk mengakses container.
 
 ### Run container
 
