@@ -73,7 +73,7 @@ ADD start-vnc.sh /home/docker
 RUN chmod +x /home/docker/start-vnc.sh
 
 # Set owner to docker
-RUN chown -R docker.docker /home/docker/
+RUN chown -R docker.docker /home/docker
 
 # Define working directory
 WORKDIR /home/docker
