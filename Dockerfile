@@ -10,6 +10,7 @@ ENV VNCDISPLAY 1
 ENV VNCDEPTH 24
 ENV VNCGEOMETRY 1280x700
 
+# Exclude some directories to reduce size
 RUN echo "path-exclude /usr/share/doc/*\n#\
 we need to keep copyright files for legal reasons\n\
 path-include /usr/share/doc/*/copyright\n\
@@ -20,14 +21,6 @@ lintian stuff is small, but really unnecessary\n\
 path-exclude /usr/share/lintian/*\n\
 path-exclude /usr/share/linda/*" \
 >> /etc/dpkg/dpkg.cfg.d/01_nodoc
-
-# Update/change apt source list to repository from Indonesia
-RUN mv /etc/apt/sources.list /etc/apt/sources.list.orig
-RUN echo "#KAMBING-UI\n\
-deb http://kambing.ui.ac.id/debian/ jessie main contrib non-free\n\
-deb http://kambing.ui.ac.id/debian/ jessie-updates main contrib non-free\n\
-deb http://kambing.ui.ac.id/debian-security/ jessie/updates main contrib non-free" \
->> /etc/apt/sources.list
 
 # Update/Upgrade/Cleansing
 RUN apt-get update && \
@@ -42,6 +35,14 @@ RUN apt-get update && \
     rm -rf /var/cache/debconf/*-old && \
     rm -rf /var/lib/apt/lists/* && \
     rm -rf /usr/share/doc/*
+
+# Update/change apt source list to repository from Indonesia
+RUN mv /etc/apt/sources.list /etc/apt/sources.list.orig
+RUN echo "#KAMBING-UI\n\
+deb http://kambing.ui.ac.id/debian/ jessie main contrib non-free\n\
+deb http://kambing.ui.ac.id/debian/ jessie-updates main contrib non-free\n\
+deb http://kambing.ui.ac.id/debian-security/ jessie/updates main contrib non-free" \
+>> /etc/apt/sources.list
 
 # Aliases & Add normal user
 RUN \
