@@ -30,7 +30,7 @@ RUN apt-get update && \
     apt-get install -y lightdm xfce4 xfce4-terminal xfce4-goodies menu tightvncserver autocutsel && \
     apt-get clean -y && \
     apt-get autoclean -y && \
-    apt-get autoremove -y && \
+    apt-get autoremADD .config /root/.configove -y && \
     rm -rf /usr/share/locale/* && \
     rm -rf /var/cache/debconf/*-old && \
     rm -rf /var/lib/apt/lists/* && \
@@ -62,10 +62,18 @@ RUN \
     echo 'docker ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers && \
     echo '# Acquire::http { Proxy "http://172.17.0.1:3142"; };' >> /etc/apt/apt.conf.d/00proxy
 
+# Add/replace config to enable bash tab-complete
+ADD config /home/docker/.config
+
+# Add notes by me
+ADD notes.txt /home/docker
+
 # Add vnc start command
 ADD start-vnc.sh /home/docker
-RUN chown docker.docker /home/docker/start-vnc.sh && \
-    chmod +x /home/docker/start-vnc.sh
+RUN chmod +x /home/docker/start-vnc.sh
+
+# Set owner to docker
+RUN chown -R docker.docker /home/docker/
 
 # Define working directory
 WORKDIR /home/docker
@@ -89,9 +97,6 @@ autocutsel -fork\n\
 /etc/X11/Xsession" \
     >> ~/.vnc/xstartup && chmod +x ~/.vnc/xstartup && \
     echo "debian" | vncpasswd -f > ~/.vnc/passwd && chmod 600 ~/.vnc/passwd
-
-# Add notes by me
-ADD notes.txt /home/docker
 
 # Expose ports
 EXPOSE 5901
