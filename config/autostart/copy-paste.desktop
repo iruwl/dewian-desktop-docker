@@ -1,0 +1,4 @@
+[Desktop Entry]
+Comment=Enable copy paste from/to host (susah nyarinya :D)
+Exec=autocutsel -fork
+Terminal=false

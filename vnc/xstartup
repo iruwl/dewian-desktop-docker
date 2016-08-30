@@ -1,0 +1,9 @@
+#!/bin/bash
+xrdb $HOME/.Xresources
+xsetroot -solid grey
+export XKL_XMODMAP_DISABLE=1
+
+#enable copy-paste from/to host
+autocutsel -fork
+
+/etc/X11/Xsession

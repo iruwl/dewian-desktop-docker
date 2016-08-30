@@ -30,7 +30,7 @@ RUN apt-get update && \
     apt-get install -y lightdm xfce4 xfce4-terminal xfce4-goodies menu tightvncserver autocutsel && \
     apt-get clean -y && \
     apt-get autoclean -y && \
-    apt-get autoremADD .config /root/.configove -y && \
+    apt-get autoremove -y && \
     rm -rf /usr/share/locale/* && \
     rm -rf /var/cache/debconf/*-old && \
     rm -rf /var/lib/apt/lists/* && \
@@ -81,22 +81,15 @@ WORKDIR /home/docker
 # Activate docker
 USER docker
 
-RUN \
-    touch ~/tab.sh && \
-    echo "#Enable bash tab-complete\nxfconf-query -c xfce4-keyboard-shortcuts -p /xfwm4/custom/'<'Super'>'Tab -r" >> ~/tab.sh && \
-    chmod +x ~/tab.sh && \
-    touch ~/.Xresources && \
+RUN touch ~/.Xresources && \
     touch ~/.Xauthority && \
     mkdir ~/.vnc && \
-    echo "#!/bin/bash\n\
-xrdb $HOME/.Xresources\n\
-xsetroot -solid grey\n\
-export XKL_XMODMAP_DISABLE=1\n#\
-enable copy-paste from/to host\n\
-autocutsel -fork\n\
-/etc/X11/Xsession" \
-    >> ~/.vnc/xstartup && chmod +x ~/.vnc/xstartup && \
-    echo "debian" | vncpasswd -f > ~/.vnc/passwd && chmod 600 ~/.vnc/passwd
+    echo "debian" | vncpasswd -f > ~/.vnc/passwd && \
+    chmod 600 ~/.vnc/passwd
+
+#RUN touch ~/tab.sh && \
+#    echo "#Enable bash tab-complete\nxfconf-query -c xfce4-keyboard-shortcuts -p /xfwm4/custom/'<'Super'>'Tab -r" >> ~/tab.sh && \
+#    chmod +x ~/tab.sh
 
 # Expose ports
 EXPOSE 5901

@@ -1,0 +1,4 @@
+[Desktop Entry]
+Comment=Enable bash tab-complete when load xfce4  (susah nyarinya :D)
+Exec=xfconf-query -c xfce4-keyboard-shortcuts -p /xfwm4/custom/'<'Super'>'Tab -r
+Terminal=true
