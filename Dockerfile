@@ -26,8 +26,8 @@ path-exclude /usr/share/linda/*" \
 RUN apt-get update && \
     apt-get upgrade -y && \
     apt-get install -yq --no-install-recommends apt-utils && \
-    apt-get install -yq --no-install-recommends sudo nano && \
-    apt-get install -y lightdm xfce4 xfce4-terminal xfce4-goodies menu tightvncserver autocutsel && \
+    apt-get install -yq --no-install-recommends sudo nano wget && \
+    apt-get install -y lightdm xfce4 xfce4-goodies iceweasel tightvncserver autocutsel && \
     apt-get clean -y && \
     apt-get autoclean -y && \
     apt-get autoremove -y && \
@@ -86,10 +86,6 @@ RUN touch ~/.Xresources && \
     mkdir ~/.vnc && \
     echo "debian" | vncpasswd -f > ~/.vnc/passwd && \
     chmod 600 ~/.vnc/passwd
-
-#RUN touch ~/tab.sh && \
-#    echo "#Enable bash tab-complete\nxfconf-query -c xfce4-keyboard-shortcuts -p /xfwm4/custom/'<'Super'>'Tab -r" >> ~/tab.sh && \
-#    chmod +x ~/tab.sh
 
 # Expose ports
 EXPOSE 5901
