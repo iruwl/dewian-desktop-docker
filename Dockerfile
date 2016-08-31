@@ -1,5 +1,5 @@
 # vnc-password -> debian
-# run          -> (v1) docker run -it --rm -p 5901:5901 -e USER=docker dewian-desktop bash -c "vncserver :1 -geometry 1280x700 -depth 24 && tail -F ~/.vnc/*.log"
+# run          -> (v1) docker run -it --rm -p 5901:5901 -e USER=docker dewian-desktop bash -c "vncserver :1 -geometry 1204x768 -depth 24 && tail -F ~/.vnc/*.log"
 #                 (v2) docker run -it --rm dewian-desktop
 
 FROM        debian:latest
